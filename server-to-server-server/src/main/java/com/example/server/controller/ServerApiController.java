@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.server.dto.Req;
 import com.example.server.dto.User;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,8 @@ public class ServerApiController {
 	}
 	
 	@PostMapping("/user/{userId}/name/{userName}")
-	public User post(@RequestBody User user,
+	public Req<User> post(
+					@RequestBody Req<User> user,
 					@PathVariable int userId,
 					@PathVariable String userName,
 					@RequestHeader("x-authorization") String authorization,
@@ -35,6 +37,15 @@ public class ServerApiController {
 		log.info("userId : {}, userName : {}", userId, userName);
 		log.info("authorization : {}, customHeader : {}", authorization, customHeader);
 		log.info("clent req : {}", user);
-		return user;
+		
+		Req<User> response = new Req<>();
+		response.setHeader(
+				new Req.Header()
+		);
+		
+		response.setBody(user.getBody());
+		
+		
+		return response;
 	}
 }
