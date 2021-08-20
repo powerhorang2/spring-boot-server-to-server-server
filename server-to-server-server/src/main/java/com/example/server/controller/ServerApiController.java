@@ -52,6 +52,7 @@ public class ServerApiController {
 				
 		RestTemplate restTemplate = new RestTemplate();
 		
+		// 제네릭 Void 는 도저히 모르겠다.
 		RequestEntity<Void> req = RequestEntity
 				.get(uri)
 				.header("X-Naver-Client-Id", "j7m7RQ8bZPts3THck_04")
